@@ -1,2 +1,2 @@
 # DCSD-GPA-Calc
-Simple app to calculate NIBM DCSD GPA.
+Simple app to fetch NIBM DCSD exam results and calculate the GPA.
