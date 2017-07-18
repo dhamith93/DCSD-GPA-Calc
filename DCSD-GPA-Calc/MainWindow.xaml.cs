@@ -44,10 +44,12 @@ namespace DCSD_GPA_Calc
                 
                 new Thread(() => {
 
-                    Thread.Sleep(300);
+                    Thread.Sleep(100);
                     progressBar.Dispatcher.BeginInvoke(
-                        (Action)(() => { progressBar.Visibility = Visibility.Visible; }));
-                    Thread.Sleep(300);
+                        (Action)(() => {
+                            progressBar.IsIndeterminate = true;
+                            progressBar.Visibility = Visibility.Visible;
+                        }));
 
                     try
                     {
@@ -64,8 +66,6 @@ namespace DCSD_GPA_Calc
                             Thread.Sleep(1000);
                             lblGPA.Dispatcher.BeginInvoke(
                                 (Action)(() => { lblGPA.Content = "GPA: " + Math.Round(result, 2).ToString(); }));
-                            Thread.Sleep(1000);
-
 
                             if (saveFile)
                             {
@@ -88,7 +88,7 @@ namespace DCSD_GPA_Calc
 
                             }
 
-                            subjectsWithGrades.Clear();
+                            subjectsWithGrades.Clear();                            
                         }
 
                     }
@@ -97,10 +97,12 @@ namespace DCSD_GPA_Calc
                         MessageBox.Show("Can't connect to the internet! Please check your connection!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
-                    Thread.Sleep(300);
+                    Thread.Sleep(100);
                     progressBar.Dispatcher.BeginInvoke(
-                        (Action)(() => { progressBar.Visibility = Visibility.Hidden; }));
-                    Thread.Sleep(300);
+                        (Action)(() => {
+                            progressBar.IsIndeterminate = false;
+                            progressBar.Visibility = Visibility.Hidden;
+                        }));
 
                 }).Start();
 
