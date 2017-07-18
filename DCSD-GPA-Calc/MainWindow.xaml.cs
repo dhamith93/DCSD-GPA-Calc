@@ -55,9 +55,10 @@ namespace DCSD_GPA_Calc
                     {
                         page = Website.GetWebsite(url);
 
-                        if (page != " ")
+                        ParseWebpage(page);
+
+                        if (subjectsWithGrades.Count > 0)
                         {
-                            ParseWebpage(page);
 
                             Calculate calculate = new Calculate();
 
