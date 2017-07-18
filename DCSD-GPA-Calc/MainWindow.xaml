@@ -12,7 +12,7 @@
         <Button x:Name="btnCalc" Content="Calculate" HorizontalAlignment="Left" Margin="342,109,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="btnCalc_Click"/>
         <CheckBox x:Name="chkBoxFileSave" Content="Save exam results to a file in Desktop" HorizontalAlignment="Left" Margin="93,72,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="lblGPA" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="188,169,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="10" Margin="5,280,0,0" VerticalAlignment="Top" Width="499" IsIndeterminate="True"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="10" Margin="5,280,0,0" VerticalAlignment="Top" Width="499" IsIndeterminate="True" Visibility="Hidden"/>
 
     </Grid>
 </Window>
