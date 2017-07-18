@@ -59,12 +59,11 @@ namespace DCSD_GPA_Calc
 
                         if (subjectsWithGrades.Count > 0)
                         {
-
                             Calculate calculate = new Calculate();
 
                             double result = calculate.GPA(subjectsWithGrades);
 
-                            Thread.Sleep(1000);
+                            Thread.Sleep(300);
                             lblGPA.Dispatcher.BeginInvoke(
                                 (Action)(() => { lblGPA.Content = "GPA: " + Math.Round(result, 2).ToString(); }));
 
@@ -110,7 +109,7 @@ namespace DCSD_GPA_Calc
             } 
             else
             {
-                MessageBox.Show("Please enter a ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                MessageBox.Show("Please enter an ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
 
         }
