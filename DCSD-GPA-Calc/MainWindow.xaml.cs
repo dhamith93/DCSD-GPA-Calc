@@ -27,21 +27,16 @@ namespace DCSD_GPA_Calc
         {
             InitializeComponent();
         }
-
-        private Dictionary<string, string> subjectsWithGrades = new Dictionary<string, string>();
-
+        
         private void btnCalc_Click(object sender, RoutedEventArgs e)
         {
             if (txtNIBMId.Text.Length > 0)
             {
                 string id = CleanString(txtNIBMId.Text);
-
                 bool saveFile = (chkBoxFileSave.IsChecked == true);
+                string url = "https://www.nibm.lk/students/exams/results?q=" + id;
+                Dictionary<string, string> subjectsWithGrades = new Dictionary<string, string>();
 
-                string url = "https://www.nibm.lk/students/exams/results?q=" + id;                
-
-                string page = " ";
-                
                 new Thread(() => {
 
                     Thread.Sleep(100);
@@ -53,14 +48,11 @@ namespace DCSD_GPA_Calc
 
                     try
                     {
-                        page = Website.GetWebsite(url);
-
-                        ParseWebpage(page);
+                        subjectsWithGrades = Website.ParseWebpage(url);
 
                         if (subjectsWithGrades.Count > 0)
                         {
                             Calculate calculate = new Calculate();
-
                             double result = calculate.GPA(subjectsWithGrades);
 
                             Thread.Sleep(300);
@@ -69,9 +61,10 @@ namespace DCSD_GPA_Calc
 
                             if (saveFile)
                             {
-                                string pathToDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\NIBM-DCSD-RESULTS.txt";
-                                
+                                string pathToDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\NIBM-DCSD-RESULTS.txt";                                
                                 StreamWriter streamWriter = new StreamWriter(pathToDesktop);
+                                streamWriter.WriteLine("ID: " + id.ToUpper());
+                                streamWriter.WriteLine();
 
                                 foreach (var subject in subjectsWithGrades)
                                 {
@@ -79,18 +72,14 @@ namespace DCSD_GPA_Calc
                                 }
 
                                 streamWriter.WriteLine();
-
                                 streamWriter.WriteLine("GPA: " + Math.Round(result, 3).ToString());
-
                                 streamWriter.Close();
                                 
                                 MessageBox.Show("Your results are saved at " + pathToDesktop, "Results Saved!", MessageBoxButton.OK, MessageBoxImage.Information);
-
                             }
 
-                            subjectsWithGrades.Clear();                            
+                            subjectsWithGrades.Clear();
                         }
-
                     }
                     catch (Exception)
                     {
@@ -114,38 +103,15 @@ namespace DCSD_GPA_Calc
 
         }
 
-        private void ParseWebpage(string page)
-        {
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(page);
-
-            List<List<string>> table = doc.DocumentNode.SelectSingleNode("//table[@class='w0']")
-            .Descendants("tr")
-            .Skip(1)
-            .Where(tr => tr.Elements("td").Count() > 1)
-            .Select(tr => tr.Elements("td").Select(td => td.InnerText.Trim()).ToList())
-            .ToList();
-
-            if (table.Count > 0)
-            {
-                for (int i = 0; i < table.Count; i++)
-                {
-                    if (!subjectsWithGrades.ContainsKey(table[i][1]))
-                    {
-                        subjectsWithGrades.Add(table[i][1], table[i][3]);
-                    }
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            }
-        }
-
         private static string CleanString(string id)
         {
             return Regex.Replace(id, @"[^\w\.@-]", "");
+        }
+
+        private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Simple app to fetch NIBM DCSD exam results and calculate the GPA. \n\nIMPORTANT: This is not an official app. Neither is the calculated GPA. For educational purposes only!", 
+                "NIBM DCSD GPA Calculator", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

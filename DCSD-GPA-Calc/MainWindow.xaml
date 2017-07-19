@@ -7,12 +7,15 @@
         mc:Ignorable="d"
         Title="DCSD GPA Calculator" Height="350" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="NIBM ID" HorizontalAlignment="Left" Margin="89,22,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtNIBMId" HorizontalAlignment="Left" Height="23" Margin="174,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" FontSize="14"/>
-        <Button x:Name="btnCalc" Content="Calculate" HorizontalAlignment="Left" Margin="342,109,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="btnCalc_Click"/>
-        <CheckBox x:Name="chkBoxFileSave" Content="Save exam results to a file in Desktop" HorizontalAlignment="Left" Margin="93,72,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="lblGPA" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="188,169,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <Label Content="NIBM ID" HorizontalAlignment="Left" Margin="89,43,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="txtNIBMId" HorizontalAlignment="Left" Height="23" Margin="174,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" FontSize="15"/>
+        <Button x:Name="btnCalc" Content="Calculate" HorizontalAlignment="Left" Margin="342,130,0,0" VerticalAlignment="Top" Width="75" FontSize="15" Click="btnCalc_Click"/>
+        <CheckBox x:Name="chkBoxFileSave" Content="Save exam results to a file in Desktop" HorizontalAlignment="Left" Margin="93,93,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label x:Name="lblGPA" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="188,190,0,0" VerticalAlignment="Top" FontSize="36"/>
         <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="10" Margin="5,280,0,0" VerticalAlignment="Top" Width="499" Visibility="Hidden"/>
+        <Menu Height="22" Margin="0,1,0,0" VerticalAlignment="Top">
+            <MenuItem x:Name="aboutMenuItem" Header="_About" Height="22" FontSize="15" Click="aboutMenuItem_Click"/>
+        </Menu>
 
     </Grid>
 </Window>
