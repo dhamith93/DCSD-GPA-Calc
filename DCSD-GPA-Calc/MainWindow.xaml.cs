@@ -57,7 +57,9 @@ namespace DCSD_GPA_Calc
 
                             Thread.Sleep(300);
                             lblGPA.Dispatcher.BeginInvoke(
-                                (Action)(() => { lblGPA.Content = "GPA: " + Math.Round(result, 2).ToString(); }));
+                                (Action)(() => {
+                                    lblGPA.Content = "GPA: " + Math.Round(result, 2).ToString();
+                                }));
 
                             if (saveFile)
                             {

@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace DCSD_GPA_Calc
 {
-    class Website
+    static class Website
     {
         public static Dictionary<string, string> ParseWebpage(string url)
         {
