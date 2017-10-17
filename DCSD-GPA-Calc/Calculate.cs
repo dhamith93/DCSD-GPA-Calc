@@ -66,10 +66,8 @@ namespace DCSD_GPA_Calc
                     }
                 }
             }
-            
-            if (totalGrades > 0) return (totalGrades / totalCredits);
 
-            return 0;
+            return (totalGrades > 0) ? (totalGrades / totalCredits) : 0;
         }
 
     }
